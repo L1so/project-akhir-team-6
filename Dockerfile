@@ -3,7 +3,7 @@ FROM node:20 AS build
 WORKDIR /usr/src/app
 
 COPY package*.json ./
-RUN npm ci  # Lebih aman daripada npm install
+RUN npm install  
 
 COPY . .
 
@@ -15,7 +15,7 @@ WORKDIR /usr/src/app
 
 COPY --from=build /usr/src/app .
 
-RUN npm ci --only=production  # Install hanya dependency produksi
+RUN npm install --only=production  
 
 EXPOSE 3001
 
