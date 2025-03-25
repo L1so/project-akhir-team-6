@@ -1,6 +1,6 @@
 ## **👪** Entities and Actors
 
-### Entities
+### Entitiess
 
 1. **User**
    - `userid`: Unique identifier for the user
