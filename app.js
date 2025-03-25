@@ -11,6 +11,7 @@ const proposalRoutes = require("./routes/proposalRoutes")
 const eventCoordinatorRoutes = require("./routes/eventCoordinatorRoutes")
 const adminRoutes = require("./routes/adminRoutes") 
 const cookiesParser = require("cookie-parser")
+const metricsRoutes = require("./routes/metricsRoutes");
 
 const port = process.env.PORT
 const app = express()
@@ -26,6 +27,7 @@ app.use("/feedback", feedbackRoutes)
 app.use("/proposals", proposalRoutes)
 app.use("/event-coordinator", eventCoordinatorRoutes)
 app.use("/admin", adminRoutes) 
+app.use("/metrics", metricsRoutes)
 
 connectDB()
 
