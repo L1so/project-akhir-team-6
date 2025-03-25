@@ -1,21 +1,21 @@
-FROM node:14 AS build
+FROM node:20 AS build
 
 WORKDIR /usr/src/app
 
 COPY package*.json ./
-RUN npm install
+RUN npm ci  # Lebih aman daripada npm install
 
 COPY . .
 
 RUN npm run build
 
-FROM node:14-alpine AS production
+FROM node:20-alpine AS production
 
 WORKDIR /usr/src/app
 
 COPY --from=build /usr/src/app .
 
-RUN npm install --only=production
+RUN npm ci --only=production  # Install hanya dependency produksi
 
 EXPOSE 3001
 
