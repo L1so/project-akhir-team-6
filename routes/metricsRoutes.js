@@ -3,6 +3,6 @@ const { getMetrics } = require("../controllers/metricsController");
 const authMiddleware = require("../middleware/authMiddleware");
 const router = express.Router();
 
-router.get("/metrics", authMiddleware, getMetrics);
+router.get("/", getMetrics);
 
 module.exports = router;
