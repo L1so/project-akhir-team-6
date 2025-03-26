@@ -6,8 +6,8 @@ COPY package*.json ./
 RUN npm install
 
 COPY . .
-ADD https://github.com/ufoscout/docker-compose-wait/releases/download/2.7.3/wait /wait
-RUN chmod +x /wait && npm run build
+
+RUN npm run build
 
 FROM node:20-alpine AS production
 
@@ -15,8 +15,9 @@ WORKDIR /usr/src/app
 
 COPY --from=build /usr/src/app .
 
-RUN npm install --only=production
+RUN chmod +x /usr/src/app/wait.sh && npm install --only=production
 
 EXPOSE 3001
 
-CMD /wait && npm start
+CMD /usr/src/app/wait.sh -c 'echo > /dev/tcp/127.0.0.1/5432' && npm start
+#CMD [ "npm", "start" ]
