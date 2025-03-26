@@ -15,9 +15,9 @@ WORKDIR /usr/src/app
 
 COPY --from=build /usr/src/app .
 
-RUN apk add --no-cache wait4x && npm install --only=production
+RUN apk add --no-cache bash && npm install --only=production && chmod +x /usr/src/app/wait-for-it.sh
 
 EXPOSE 3001
 
-CMD wait4x tcp db:5432 && npm start
-#CMD [ "npm", "start" ]
+#CMD ["sh", "-c", "/usr/local/bin/wait-for-it.sh postgres:5432 -- npm start"]
+CMD [ "npm", "start" ]
