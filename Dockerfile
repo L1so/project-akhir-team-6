@@ -15,9 +15,9 @@ WORKDIR /usr/src/app
 
 COPY --from=build /usr/src/app .
 
-RUN chmod +x /usr/src/app/wait.sh && npm install --only=production
+RUN apk add --no-cache wait4x && npm install --only=production
 
 EXPOSE 3001
 
-CMD /usr/src/app/wait.sh -c 'echo > /dev/tcp/127.0.0.1/5432' && npm start
+CMD wait4x tcp db:5432 && npm start
 #CMD [ "npm", "start" ]
